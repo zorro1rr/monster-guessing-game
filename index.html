@@ -4,8 +4,43 @@
 	<title>Monsters!</title>
 
 	<style type="text/css">
-		body {
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		 outline: 1px solid hotpink;
+		}
+
+
+		/* body {
 			margin: 1em auto;
+			max-width: 40em;
+			width: 88%;
+			text-align: center;
+			background-image: url('fury-monster.png');
+			height: 100vh;
+			background-size: cover;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			box-shadow: inset 0 0 0 1000px rgba(0,0,0,.25);
+		} */
+
+		body {
+				background-image: url('fury-monster.png');
+				background-size: cover;
+				height: 100vh;
+				margin: 1em auto;
+				max-width: 40em;
+				width: 88%;
+				text-align: center;
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+		}
+
+		#container{
 			max-width: 40em;
 			width: 88%;
 		}
@@ -43,17 +78,19 @@
 </head>
 <body>
 
-	<h1>Monsters!</h1>
-
+	<div id="container">
 	<div id="app"></div>
-
+	<img src="monsterxxx.svg" alt="">
 
 	<footer>
 		<hr>
-		<p class="text-small text-muted">Icons by <a href="https://thenounproject.com/term/door/311732/">Jamie Dickinson</a>, <a href="https://thenounproject.com/term/monster/184225/">Nicky Knicky</a>, <a href="https://thenounproject.com/term/monster/1510400/">Alvaro Cabrera</a>, <a href="https://thenounproject.com/term/monster/28460/">Eliricon</a>, <a href="https://thenounproject.com/term/monster/82823/">April Yang</a>, <a href="https://thenounproject.com/term/monster/1062009/">tk66</a>, <a href="https://thenounproject.com/term/monster/24990/">Alex WaZa</a>, <a href="https://thenounproject.com/term/monster/37212/">Husein Aziz</a>, <a href="https://thenounproject.com/term/monster/2236082">iconcheese</a>, and <a href="https://thenounproject.com/term/socks/38451/">Yazmin Alanis</a>.</p>
+		<p class="text-small text-muted">Icons by: <a href="https://thenounproject.com/term/door/311732/">Jamie Dickinson</a>, <a href="https://thenounproject.com/term/monster/184225/">Nicky Knicky</a>, <a href="https://thenounproject.com/term/monster/1510400/">Alvaro Cabrera</a>, <a href="https://thenounproject.com/term/monster/28460/">Eliricon</a>, <a href="https://thenounproject.com/term/monster/82823/">April Yang</a>, <a href="https://thenounproject.com/term/monster/1062009/">tk66</a>, <a href="https://thenounproject.com/term/monster/24990/">Alex WaZa</a>, <a href="https://thenounproject.com/term/monster/37212/">Husein Aziz</a>, <a href="https://thenounproject.com/term/monster/2236082">iconcheese</a>, and <a href="https://thenounproject.com/term/socks/38451/">Yazmin Alanis</a>.</p>
 	</footer>
-
+	</div>
 	<script>
+	//this project is a guessing game that hides a shuffled array of monster images (and 1 sock) behind a grid of "door" buttons. When a button is clicked, the monster/sock is revealed. If you find all of the monsters before the sock you win!
+
+
 		// The monsters and socks
 		var monsters = [
 			'monster1',
@@ -163,7 +200,8 @@ const winHandler = function(){
     //shuffle monster array using helper function
     shuffle(monsters);
     //inject into dom, use .map/join to loop through the monster array and give each door a data-monster-id equal to the monsters index you can check for in the clickHandler.
-  app.innerHTML = '<div class="row">' + monsters.map(function (monster, index) {
+  app.innerHTML = '<h1>Monsters!</h1>' + '<p>Click the doors to reveal what\'s behind them. Try to find all the monsters before the sock appears!</p>' +
+	'<div class="row">' + monsters.map(function (monster, index) {
 	return '<div class="grid">' + '<button data-monster-id="'+ index +'"><img src="door.svg"</button>' + '</div>';
 }).join('') + '</div>';
 };
