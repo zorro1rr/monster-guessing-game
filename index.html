@@ -33,12 +33,12 @@
 		#trackers{
 			font-family: 'Eater', cursive;
 			position: absolute;
-			margin-left: -42%;
+			margin-left: -37%;
 			font-size: 2rem;
 		}
 
 		#losses {
-			padding-top: 6px;
+			padding-left: 40px;
 		}
 
 		/**
@@ -83,13 +83,33 @@
 		    color: black;
 		}
 
+		/*
+ 		use media queries to make page responsive to all screen sizes
+  	*/
+		@media only screen and (max-width: 1175px) {
+			#trackers{
+				position: relative;
+				margin-left: 0;
+			}
+		}
+
+		@media only screen and (max-width: 410px) {
+			h1 {
+				font-size: 1rem;
+			}
+			#p1{
+				font-size: .75rem;
+			}
+			#trackers{
+				font-size: 1rem;
+			}
+		}
 	</style>
 </head>
 <body>
 
 	<span id="trackers">
-	<p id="wins">Wins: </p>
-	<p id="losses">Losses: </p>
+	<p><span id="wins">Wins: </span><span id="losses">Losses: </span></p>
 	</span>
 	<div id="app"></div>
 
@@ -226,7 +246,7 @@ const winHandler = function(){
     shuffle(monsters);
 		console.log(monsters);
     //inject into dom, use .map/join to loop through the monster array and give each door a data-monster-id equal to the monsters index you can check for in the clickHandler.
-  app.innerHTML = '<h1>Monsters!</h1>' + '<p>Click the doors to reveal what\'s behind them. Try to find all the monsters before the sock appears!</p>' +
+  app.innerHTML = '<h1>Monsters!</h1>' + '<p id="p1">Click the doors to reveal what\'s behind them. Try to find all the monsters before the sock appears!</p>' +
 	'<div class="row">' + monsters.map(function (monster, index) {
 	return '<div class="grid">' + '<button data-monster-id="'+ index +'"><img src="door.png"</button>' + '</div>';
 }).join('') + '</div>';
