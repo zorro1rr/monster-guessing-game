@@ -25,13 +25,20 @@
 				align-items: center;
 		}
 
-		#container{
-			max-width: 40em;
-			width: 88%;
-		}
 
 		#app{
 			font-family: 'Eater', cursive;
+		}
+
+		#trackers{
+			font-family: 'Eater', cursive;
+			position: absolute;
+			margin-left: -42%;
+			font-size: 2rem;
+		}
+
+		#losses {
+			padding-top: 6px;
 		}
 
 		/**
@@ -80,15 +87,16 @@
 </head>
 <body>
 
-	<div id="container">
+	<span id="trackers">
+	<p id="wins">Wins: </p>
+	<p id="losses">Losses: </p>
+	</span>
 	<div id="app"></div>
-
 
 	<footer>
 		<hr>
 		<p  id="icon" class="text-small text-muted">Icons by: <a href="https://thenounproject.com/term/door/311732/">Jamie Dickinson</a>, <a href="https://thenounproject.com/term/monster/184225/">Nicky Knicky</a>, <a href="https://thenounproject.com/term/monster/1510400/">Alvaro Cabrera</a>, <a href="https://thenounproject.com/term/monster/28460/">Eliricon</a>, <a href="https://thenounproject.com/term/monster/82823/">April Yang</a>, <a href="https://thenounproject.com/term/monster/1062009/">tk66</a>, <a href="https://thenounproject.com/term/monster/24990/">Alex WaZa</a>, <a href="https://thenounproject.com/term/monster/37212/">Husein Aziz</a>, <a href="https://thenounproject.com/term/monster/2236082">iconcheese</a>, and <a href="https://thenounproject.com/term/socks/38451/">Yazmin Alanis</a>.</p>
 	</footer>
-	</div>
 	<script>
 	//this project is a guessing game that hides a shuffled array of monster images (and 1 sock) behind a grid of "door" buttons. When a button is clicked, the monster/sock is revealed. If you find all of the monsters before the sock you win!
 
@@ -108,6 +116,7 @@
 			'monster11',
 			'sock'
 		];
+
 
     /**
  * Randomly shuffle an array
@@ -137,10 +146,16 @@ var shuffle = function (array) {
 };
 
 
-//grab app to inject monsters onto
+//grab sections to inject html onto
 const app = document.querySelector('#app');
+const losses = document.querySelector('#losses');
+const wins = document.querySelector('#wins');
+//keep track of how many monsters have been found
 let found = 0;
-
+//keep track of losses
+let lossCount = 0;
+//keep track of wins
+let winCount = 0;
 //make a clickhandler function to attach eventListener too
 const clickHandler = function (event) {
   //check if button has the the data-monster-id attribute if not end the function
@@ -180,6 +195,10 @@ const lossHandler = function(){
     found = 0;
 //rerender the page
     render();
+//add a lossCount and inject the count into the html
+		lossCount++;
+		console.log(lossCount);
+		losses.innerHTML = 'Losses: ' + lossCount;
     return;
   }, 300);
 };
@@ -193,6 +212,10 @@ const winHandler = function(){
   found = 0;
   //rerender the page
   render();
+	//add a winCount and inject the count into the html
+			winCount++;
+			console.log(winCount);
+			wins.innerHTML = 'Wins: ' +  winCount;
   return;
 }, 300);
 };
@@ -201,12 +224,19 @@ const winHandler = function(){
   const render = function (){
     //shuffle monster array using helper function
     shuffle(monsters);
+		console.log(monsters);
     //inject into dom, use .map/join to loop through the monster array and give each door a data-monster-id equal to the monsters index you can check for in the clickHandler.
   app.innerHTML = '<h1>Monsters!</h1>' + '<p>Click the doors to reveal what\'s behind them. Try to find all the monsters before the sock appears!</p>' +
 	'<div class="row">' + monsters.map(function (monster, index) {
 	return '<div class="grid">' + '<button data-monster-id="'+ index +'"><img src="door.png"</button>' + '</div>';
 }).join('') + '</div>';
 };
+
+//keep track of losses
+
+
+
+
 //render the monsters on page load
 render();
 
